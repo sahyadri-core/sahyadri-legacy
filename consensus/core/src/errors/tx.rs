@@ -13,6 +13,9 @@ pub enum TxRuleError {
     #[error("Transaction nonce is invalid. Expected {0}, but got {1}")]
     InvalidNonce(u64, u64),
 
+    #[error("Transaction fee is below the fixed minimum of 1000 Kana")]
+    ZeroFee,
+    
     #[error("Transaction payload is invalid")]
     InvalidPayload,
 
