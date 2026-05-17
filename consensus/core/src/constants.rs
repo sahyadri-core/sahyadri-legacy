@@ -13,7 +13,7 @@ pub const MAX_SCRIPT_PUBLIC_KEY_VERSION: u16 = 0;
 pub const KANA_PER_SAHYADRI: u64 = 100_000_000;
 
 /// The parameter for scaling inverse CSM value to mass units (KIP-0009)
-pub const STORAGE_MASS_PARAMETER: u64 = KANA_PER_SAHYADRI * 10_000;
+pub const STORAGE_MASS_PARAMETER: u64 = 0; // Set to 0 for Account Model & Fixed 1000 Kana Flat Fee
 
 /// The parameter defining how much mass per byte to charge for when calculating
 /// transient storage mass. Since normally the block mass limit is 500_000, this limits
