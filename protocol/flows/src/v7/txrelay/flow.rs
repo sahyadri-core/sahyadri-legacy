@@ -24,7 +24,7 @@ use sahyadri_p2p_lib::{
 use std::sync::Arc;
 use tokio::time::timeout;
 
-pub(crate) const MAX_TPS_THRESHOLD: u64 = 3000;
+pub(crate) const MAX_TPS_THRESHOLD: u64 = 15000;
 
 enum Response {
     Transaction(Transaction),
