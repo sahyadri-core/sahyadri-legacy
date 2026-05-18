@@ -609,7 +609,7 @@ impl VirtualStateProcessor {
         let total_reward = coinbase_data.subsidy; 
 
         if total_reward > 0 {
-            // 2. Dev Fee Split (2% for Company)
+            // 2. Dev Fee Split (2% for Treasury)
             let dev_fee = total_reward / 50;
             let miner_reward = total_reward - dev_fee;
 
@@ -620,7 +620,7 @@ impl VirtualStateProcessor {
                 miner_reward as i64
             );
 
-            // TODO: Company address ko string se ScriptPublicKey me convert karke dev_fee bhi add karni hai
+            // TODO: Treasury address ko string se ScriptPublicKey me convert karke dev_fee bhi add karni hai
 
             println!("SAHYADRI REWARD: Added {} Kana to Miner! (Dev Fee: {})", miner_reward, dev_fee);
         }

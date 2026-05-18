@@ -14,6 +14,7 @@ const LENGTH_OF_BLUE_SCORE: usize = size_of::<u64>();
 const LENGTH_OF_SUBSIDY: usize = size_of::<u64>();
 const LENGTH_OF_SCRIPT_PUB_KEY_VERSION: usize = size_of::<u16>();
 const LENGTH_OF_SCRIPT_PUB_KEY_LENGTH: usize = size_of::<u8>();
+const SAHYADRI_TREASURY_ADDRESS: &str = "csm1sr5hjpvqf2gftk3cpfyzn4u7je779248lcw8ceglsgxxr3yp5gjrwph0etepr";
 
 const MIN_PAYLOAD_LENGTH: usize =
     LENGTH_OF_BLUE_SCORE + LENGTH_OF_SUBSIDY + LENGTH_OF_SCRIPT_PUB_KEY_VERSION + LENGTH_OF_SCRIPT_PUB_KEY_LENGTH;
@@ -120,10 +121,10 @@ impl CoinbaseManager {
             let total_reward = reward_data.subsidy + reward_data.total_fees;
             
             if total_reward > 0 {
-                // 98-2 split for Block Subsidy -> 2% to company
+                // 98-2 split for Block Subsidy -> 2% to treasury
                 let subsidy_dev_fee = reward_data.subsidy / 50; 
                 
-                // 90-10 split for Transaction Fees -> 10% to company
+                // 90-10 split for Transaction Fees -> 10% to treasury
                 let tx_dev_fee = reward_data.total_fees / 10;   
 
                 // Total dev fee and remaining for miner
@@ -132,11 +133,9 @@ impl CoinbaseManager {
 
                 let miner_address = extract_address(&reward_data.script_public_key);
                 
-                // Updated Company Address
-                let company_address = "csm1sr5hjpvqf2gftk3cpfyzn4u7je779248lcw8ceglsgxxr3yp5gjrwph0etepr".to_string();
 
                 *account_rewards.entry(miner_address).or_insert(0) += miner_reward as i64;
-                *account_rewards.entry(company_address).or_insert(0) += total_dev_fee as i64;
+                *account_rewards.entry(SAHYADRI_TREASURY_ADDRESS.to_string()).or_insert(0) += total_dev_fee as i64;
             }
         }
 
@@ -161,10 +160,10 @@ impl CoinbaseManager {
         let total_red_reward = red_subsidy + red_fees;
         
         if total_red_reward > 0 {
-            // 98-2 split for Block Subsidy -> 2% to company
+            // 98-2 split for Block Subsidy -> 2% to treasury
             let subsidy_dev_fee = red_subsidy / 50; 
             
-            // 90-10 split for Tx Fees -> 10% to company
+            // 90-10 split for Tx Fees -> 10% to treasury
             let tx_dev_fee = red_fees / 10; 
 
             // Total dev fee and remaining for miner
@@ -173,11 +172,9 @@ impl CoinbaseManager {
 
             let miner_address = extract_address(&miner_data.script_public_key);
             
-            // Updated Company Address
-            let company_address = "csm1sr5hjpvqf2gftk3cpfyzn4u7je779248lcw8ceglsgxxr3yp5gjrwph0etepr".to_string();
 
             *account_rewards.entry(miner_address).or_insert(0) += miner_reward as i64;
-            *account_rewards.entry(company_address).or_insert(0) += total_dev_fee as i64;
+            *account_rewards.entry(SAHYADRI_TREASURY_ADDRESS.to_string()).or_insert(0) += total_dev_fee as i64;
         }
 
         Ok(account_rewards)
