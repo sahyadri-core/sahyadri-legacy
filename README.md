@@ -27,10 +27,6 @@ Use this code if you want to:
     Fork and build your own DAG-based network
     Test and experiment in isolation
 
-Quick Start
-
-# Prerequisitessudo apt update && sudo apt install -y git build-essential cmake pkg-config libssl-dev# Clone and buildgit clone https://github.com/sahyadri-core/sahyadri-legacy.gitcd sahyadri-legacycargo build --release
-
 ## 🔗 Official Links
  * **Official Code:** https://github.com/sahyadri-core/sahyadri
  * **Website:** https://sahyadri.io
